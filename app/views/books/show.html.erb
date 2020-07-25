@@ -1,0 +1,25 @@
+<div class="notice">
+	<% if flash[:notice] %>
+	  <p><%= flash[:notice] %></p>
+	<% end %>
+</div>
+<%= render 'books/list', book: @book_new, user: @user %>
+
+	<div class="pull-left col-xs-9">
+		<h2>Book detail</h2>
+		<table class="table">
+			<tbody>
+				<tr>
+					<td><%= attachment_image_tag @user, :profile_image, format: 'jpeg', size: "100x100", fallback: "no_image.jpg" %><br>
+						<%= link_to @user.name, user_path(@user) %>
+					</td>
+					<td><%= @book.title %></td>
+					<td><%= @book.body %></td>
+					<% if @book.user == current_user %>
+					<td><%= link_to "Edit", edit_book_path(@book), class:"btn btn-success" %></td>
+					<td><%= link_to "Destroy", book_path, method: :delete, "data-confirm" => "本当に消しますか？", class:"btn btn-danger" %></td>
+					<% end %>
+				</tr>
+			</tbody>
+		</table>
+	</div>
